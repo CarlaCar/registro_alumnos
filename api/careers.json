@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "ciencia de datos"
+  },
+  {
+    "id": 2,
+    "name": "programacion"
+  },
+  {
+    "id": 3,
+    "name": "analista de sistemas"
+  },
+  {
+    "id": 4,
+    "name": "enfermeria"
+  },
+  {
+    "id": 5,
+    "name": "inteligencia artificial"
+  },
+  {
+    "id": 6,
+    "name": "abogacia"
+  }
+]

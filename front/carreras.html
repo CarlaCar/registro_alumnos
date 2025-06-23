@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carreras - Instituto Universitario Ch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="img/logo.png.png" alt="Logo Instituto Universitario Ch" class="logo-img">
+      <h1 class="titulo-principal">Instituto Universitario Ch</h1>
+    </a>
+    <nav class="nav-central">
+      <a href="index.html">Inicio</a>
+      <a href="carreras.html">Carreras</a>
+      <a href="categorias.html">Categorías</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card card-margen-superior">
+      <h2>Gestión de Carreras</h2>
+      <p>Agregá, buscá o eliminá carreras de manera simple.</p>
+    </section>
+
+    <section class="card">
+      <h2>Agregar Nueva Carrera</h2>
+      <form id="formCareer" class="form-carrera">
+        <select id="careerName" class="campo-uniforme">
+          <option value="ciencia de datos">Ciencia de Datos</option>
+          <option value="programador">Programador</option>
+          <option value="inteligencia artificial">Inteligencia Artificial</option>
+          <option value="analista de sistemas">Analista de Sistemas</option>
+          <option value="abogacia">Abogacía</option>
+          <option value="enfermeria">Enfermería</option>
+          <option value="medicina">Medicina</option>
+          <option value="psicologia">Psicología</option>
+          <option value="ingenieria">Ingeniería</option>
+        </select>
+        <button type="button" class="btn btn-celeste campo-uniforme" onclick="registerCareer()">Agregar</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Buscar Carrera</h2>
+      <div class="input-group">
+        <input type="text" id="careerSearch" class="campo-uniforme" placeholder="Nombre de la carrera" />
+        <button class="btn btn-celeste campo-uniforme" onclick="getCareerByName()">Buscar</button>
+      </div>
+      <div id="careerSearchResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>Eliminar Carrera</h2>
+      <div class="input-group">
+        <input type="text" id="careerDelete" class="campo-uniforme" placeholder="ID de la carrera" />
+        <button class="btn btn-danger campo-uniforme" onclick="deleteCareer()">Eliminar</button>
+      </div>
+      <div id="careerDeleteResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h3>Carreras cargadas</h3>
+      <table class="table" id="careersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Carrera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas se llenan desde JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer-principal">
+    &copy; 2025 Instituto Universitario Ch. 
+  </footer>
+
+  <div id="customAlert" class="custom-alert"></div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app.js"></script>
+</body>
+</html>

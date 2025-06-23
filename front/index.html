@@ -1,42 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Student API Client</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+  <meta charset="UTF-8" />
+  <title>Instituto Universitario Ch - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
-    <h1>Student API Client</h1>
-
-    <section>
-        <h2>Register Student</h2>
-        <input type="text" id="registerName" placeholder="Name">
-        <input type="text" id="registerCareer" placeholder="Career">
-        <button onclick="registerStudent()">Register</button>
-        <pre id="registerResult"></pre>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="img/logo.png.png" alt="Logo Instituto Universitario Ch" class="logo-img">
+      <h1 class="titulo-principal">Instituto Universitario Ch</h1>
+    </a>
+    <nav class="nav-central">
+      <a href="index.html">Inicio</a>
+      <a href="carreras.html">Carreras</a>
+      <a href="categorias.html">Categorías</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card card-bienvenida">
+      <h2>Bienvenido al Sistema de Registro de Alumnos</h2>
+      <p>
+        Gestioná de manera simple.<br>
+        <span class="span-azul"></span>
+      </p>
     </section>
 
-    <section>
-        <h2>Get Student by ID</h2>
-        <input type="number" id="studentId" placeholder="Student ID">
-        <button onclick="getStudentById()">Get Student</button>
-        <pre id="getResult"></pre>
+    <section class="card">
+      <h2>Registro de Alumnos</h2>
+      <form id="formAlumno" class="form-columna">
+        <label for="registerName">Nombre:</label>
+        <input type="text" id="registerName" required placeholder="Ej: Carla" class="campo-uniforme" />
+
+        <label for="registerCareer">Carrera:</label>
+        <select id="registerCareer" class="campo-uniforme" required>
+          <!-- Opciones -->
+        </select>
+
+        <button type="button" class="btn-uniforme" onclick="registerStudent()">Agregar</button>
+      </form>
     </section>
 
-    <section>
-        <h2>Get Students by Career</h2>
-        <input type="text" id="careerFilter" placeholder="Career">
-        <button onclick="getStudentsByCareer()">Get Students</button>
-        <pre id="careerResult"></pre>
+    <!-- Buscar Alumno -->
+    <section class="card">
+      <h2>Buscar Alumno</h2>
+      <div class="form-columna">
+        <input type="text" id="studentSearch" placeholder="Nombre o ID del alumno" class="campo-uniforme" />
+        <button class="btn-uniforme" onclick="searchStudent()">Buscar</button>
+      </div>
+      <div id="studentSearchResult" class="result"></div>
     </section>
 
-    <section>
-        <h2>Delete Student</h2>
-        <input type="number" id="deleteId" placeholder="Student ID">
-        <button onclick="deleteStudent()">Delete Student</button>
-        <pre id="deleteResult"></pre>
+    <!-- Eliminar Alumno -->
+    <section class="card">
+      <h2>Eliminar Alumno</h2>
+      <input type="number" id="studentDelete" class="form-control campo-uniforme" placeholder="ID del alumno" />
+      <button class="btn btn-celeste campo-uniforme" onclick="deleteStudent()">Eliminar</button>
+      <div id="studentDeleteResult" class="result"></div>
     </section>
 
-    <script src="app.js"></script>
+    <!-- Tabla de alumnos cargados -->
+    <section id="dataSummary" class="card">
+      <h3>Alumnos cargados</h3>
+      <table class="table" id="studentsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Carrera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas se llenan desde JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer class="footer-principal">
+    &copy; 2025 Instituto Universitario Ch. 
+  </footer>
+
+  <div id="customAlert" class="custom-alert"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app.js"></script>
 </body>
 </html>

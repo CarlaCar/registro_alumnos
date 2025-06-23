@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": 8,
+    "name": "alexis barrientos",
+    "career": "programacion"
+  },
+  {
+    "id": 14,
+    "name": "rodrigo",
+    "career": "ia"
+  },
+  {
+    "id": 15,
+    "name": "loli",
+    "career": "ciencia de datos"
+  },
+  {
+    "id": 16,
+    "name": "agustina",
+    "career": "enfermeria"
+  },
+  {
+    "id": 17,
+    "name": "carla",
+    "career": "programacion"
+  },
+  {
+    "id": 18,
+    "name": "loli",
+    "career": "analista de sistemas"
+  }
+]

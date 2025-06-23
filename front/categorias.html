@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Categorías - Instituto Universitario Ch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="estilos.css" />
+  <style>
+    .form-columna {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="img/logo.png.png" alt="Logo Instituto Universitario Ch" class="logo-img">
+      <h1 class="titulo-principal">Instituto Universitario Ch</h1>
+    </a>
+    <nav class="nav-central">
+      <a href="index.html">Inicio</a>
+      <a href="carreras.html">Carreras</a>
+      <a href="categorias.html">Categorías</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card card-margen-superior">
+      <h2>Gestión de Categorías</h2>
+      <p>Agregá, buscá o eliminá categorías de carreras.</p>
+    </section>
+
+    <section class="card">
+      <h2>Agregar Nueva Categoría</h2>
+      <form id="formCategory" class="form-categoria">
+        <label for="newCategoryName">Categoría:</label>
+        <select id="newCategoryName" class="campo-uniforme" required>
+          <option value="">Seleccioná una categoría</option>
+          <option value="Ciencias Sociales">Ciencias Sociales</option>
+          <option value="Ciencias Naturales">Ciencias Naturales</option>
+          <option value="Informática">Informática</option>
+          <option value="Salud">Salud</option>
+          <option value="Leyes">Leyes</option>
+        </select>
+
+        <label for="categoryType">Tipo:</label>
+        <select id="categoryType" class="campo-uniforme" required>
+          <option value="tecnicatura">Tecnicatura</option>
+          <option value="posgrado">Posgrado</option>
+          <option value="profesorado">Profesorado</option>
+          <option value="curso">Curso</option>
+          <option value="licenciatura">Licenciatura</option>
+        </select>
+
+        <button type="button" class="btn btn-celeste campo-uniforme" onclick="registerCategory()">Agregar Categoría</button>
+      </form>
+      <div id="categoryAddResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>Buscar Categoría</h2>
+      <div class="input-group">
+        <input type="text" id="categorySearch" class="campo-uniforme" placeholder="Nombre de la categoría" />
+        <button class="btn btn-celeste campo-uniforme" onclick="getCategoryByName()">Buscar</button>
+      </div>
+      <div id="categorySearchResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>Eliminar Categoría</h2>
+      <div class="input-group">
+        <input type="text" id="categoryDelete" class="campo-uniforme" placeholder="Nombre de la categoría" />
+        <button class="btn btn-danger campo-uniforme" onclick="deleteCategory()">Eliminar</button>
+      </div>
+      <div id="categoryDeleteResult" class="result"></div>
+    </section>
+
+    <section id="dataSummary" class="card">
+      <h3>Categorías cargadas</h3>
+      <table class="table" id="categoriesTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoría</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas se llenan desde JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer-principal">
+    &copy; 2025 Instituto Universitario Ch. 
+  </footer>
+
+  <div id="customAlert" class="custom-alert"></div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app.js"></script>
+ 
+</body>
+</html>
