@@ -1,20 +1,5 @@
 [
   {
-    "id": 8,
-    "name": "alexis barrientos",
-    "career": "programacion"
-  },
-  {
-    "id": 14,
-    "name": "rodrigo",
-    "career": "ia"
-  },
-  {
-    "id": 15,
-    "name": "loli",
-    "career": "ciencia de datos"
-  },
-  {
     "id": 16,
     "name": "agustina",
     "career": "enfermeria"
@@ -28,5 +13,20 @@
     "id": 18,
     "name": "loli",
     "career": "analista de sistemas"
+  },
+  {
+    "id": 19,
+    "name": "santiago",
+    "career": "ciencia de datos"
+  },
+  {
+    "id": 20,
+    "name": "laura",
+    "career": "ciencia de datos"
+  },
+  {
+    "id": 21,
+    "name": "fatima",
+    "career": "ciencia de datos"
   }
 ]
