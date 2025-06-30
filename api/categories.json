@@ -8,10 +8,6 @@
     "name": "Salud"
   },
   {
-    "id": 9,
-    "name": "Informática"
-  },
-  {
     "id": 10,
     "name": "Arte"
   },
@@ -24,11 +20,11 @@
     "name": "Ciencias Naturales"
   },
   {
-    "id": 14,
-    "name": "Informática"
-  },
-  {
     "id": 16,
     "name": "test"
+  },
+  {
+    "id": 17,
+    "name": "test2"
   }
 ]

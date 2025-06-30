@@ -46,10 +46,7 @@ async function loadCategories() {
 }
 // Llama a la función para cargar las categorías al inicio
 function registerCategory() {
-  // Toma el valor del input si existe, si no el del select
-  const inputValue = document.getElementById('newCategoryInput').value.trim();
-  const selectValue = document.getElementById('newCategoryName').value;
-  const name = inputValue || selectValue;
+  const name = document.getElementById('newCategoryInput').value.trim();
   const type = document.getElementById('categoryType').value;
   if (!name || !type) {
     Swal.fire({ icon: 'warning', title: 'Complete todos los campos', timer: 2000, showConfirmButton: false });
@@ -66,7 +63,7 @@ function registerCategory() {
     })
     .then(() => {
       document.getElementById('newCategoryInput').value = '';
-      loadCategories(); // Actualiza la tabla
+      loadCategories();
       Swal.fire({ icon: 'success', title: 'Categoría agregada correctamente', timer: 2000, showConfirmButton: false });
     })
     .catch(err => {
@@ -107,16 +104,33 @@ async function deleteCategory() {
   const name = document.getElementById('categoryDelete').value.trim();
   if (!name) return showAlert('Ingrese el nombre de la categoría a eliminar', 'warning');
 
+  // Busca la categoría antes de eliminar
   try {
-    const res = await fetch(`${API_CATEGORIES_URL}/${encodeURIComponent(name)}`, {
-      method: 'DELETE',
-      headers,
-    });
+    const res = await fetch(`${API_CATEGORIES_URL}/${encodeURIComponent(name)}`, { headers });
     if (res.status === 404) {
       document.getElementById('categoryDeleteResult').textContent = 'Categoría no encontrada para eliminar';
       return;
     }
-    if (!res.ok) throw new Error('Error al eliminar categoría');
+    if (!res.ok) throw new Error('Error al buscar categoría');
+    const category = await res.json();
+
+    // Confirmación SweetAlert
+    const result = await Swal.fire({
+      icon: 'warning',
+      title: '¿Está seguro de eliminar esta categoría?',
+      html: `<b>Nombre:</b> ${category.name}<br><b>Tipo:</b> ${category.type || 'No especificado'}`,
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (!result.isConfirmed) return;
+
+    // Si confirma, elimina
+    const delRes = await fetch(`${API_CATEGORIES_URL}/${encodeURIComponent(name)}`, {
+      method: 'DELETE',
+      headers,
+    });
+    if (!delRes.ok) throw new Error('Error al eliminar categoría');
     showAlert('Categoría eliminada correctamente', 'success');
     document.getElementById('categoryDelete').value = '';
     loadCategories();
@@ -150,21 +164,33 @@ async function loadCareers() {
 }
 // Registra una nueva carrera
 async function registerCareer() {
-  const inputValue = document.getElementById('careerInput').value.trim();
-  const selectValue = document.getElementById('careerName').value;
-  const name = inputValue || selectValue;
-  if (!name) return showAlert('El nombre de la carrera es obligatorio', 'error');
+  const nameInput = document.getElementById('careerName');
+  const categorySelect = document.getElementById('careerCategory');
+  if (!nameInput || !categorySelect) {
+    Swal.fire({ icon: 'error', title: 'Formulario incompleto', timer: 2000, showConfirmButton: false });
+    return;
+  }
+  const name = nameInput.value.trim();
+  const category = categorySelect.value;
+  if (!name || !category) {
+    Swal.fire({ icon: 'warning', title: 'Complete todos los campos', timer: 2000, showConfirmButton: false });
+    return;
+  }
 
   try {
     const res = await fetch(API_CAREERS_URL, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ name, category }),
     });
+    if (res.status === 409) {
+      showAlert('La carrera ya existe', 'error');
+      return;
+    }
     if (!res.ok) throw new Error('Error al agregar carrera');
     showAlert('Carrera agregada correctamente', 'success');
-    document.getElementById('careerInput').value = '';
     document.getElementById('careerName').value = '';
+    document.getElementById('careerCategory').value = '';
     loadCareers();
   } catch (error) {
     if (error.message === 'La carrera ya existe') {
@@ -174,6 +200,7 @@ async function registerCareer() {
     }
   }
 }
+window.registerCareer = registerCareer;
 
 function getCareerByName() {
   const name = document.getElementById('careerSearch').value.trim();
@@ -204,15 +231,32 @@ async function deleteCareer() {
   }
 
   try {
-    const res = await fetch(`${API_CAREERS_URL}/${encodeURIComponent(id)}`, {
-      method: 'DELETE',
-      headers,
-    });
+    // Busca la carrera antes de eliminar
+    const res = await fetch(`${API_CAREERS_URL}/${encodeURIComponent(id)}`, { headers });
     if (res.status === 404) {
       document.getElementById('careerDeleteResult').textContent = 'Carrera no encontrada para eliminar';
       return;
     }
-    if (!res.ok) throw new Error('Error al eliminar carrera');
+    if (!res.ok) throw new Error('Error al buscar carrera');
+    const career = await res.json();
+
+    // Confirmación SweetAlert
+    const result = await Swal.fire({
+      icon: 'warning',
+      title: '¿Está seguro de eliminar esta carrera?',
+      html: `<b>ID:</b> ${career.id}<br><b>Nombre:</b> ${career.name}<br><b>Categoría:</b> ${career.category || 'No especificada'}`,
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (!result.isConfirmed) return;
+
+    // Si confirma, elimina
+    const delRes = await fetch(`${API_CAREERS_URL}/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+      headers,
+    });
+    if (!delRes.ok) throw new Error('Error al eliminar carrera');
     showAlert('Carrera eliminada correctamente', 'success');
     document.getElementById('careerDelete').value = '';
     loadCareers();
@@ -220,6 +264,7 @@ async function deleteCareer() {
     showAlert(error.message, 'error');
   }
 }
+window.deleteCareer = deleteCareer;
 
 async function loadCareersSelect() {
   const res = await fetch(API_CAREERS_URL, { headers });
@@ -489,4 +534,3 @@ document.addEventListener('DOMContentLoaded', () => {
 // de forma dinámica con la base de datos (API) sin recargar la página.
 // Cada función se encarga de una acción: cargar datos, registrar, buscar o eliminar.
 //  El sistema mantiene actualizada la interfaz de acuerdo a las acciones del usuario.
-//
