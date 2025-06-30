@@ -46,7 +46,10 @@ async function loadCategories() {
 }
 // Llama a la función para cargar las categorías al inicio
 function registerCategory() {
-  const name = document.getElementById('newCategoryName').value.trim();
+  // Toma el valor del input si existe, si no el del select
+  const inputValue = document.getElementById('newCategoryInput').value.trim();
+  const selectValue = document.getElementById('newCategoryName').value;
+  const name = inputValue || selectValue;
   const type = document.getElementById('categoryType').value;
   if (!name || !type) {
     Swal.fire({ icon: 'warning', title: 'Complete todos los campos', timer: 2000, showConfirmButton: false });
@@ -62,7 +65,7 @@ function registerCategory() {
       return res.json();
     })
     .then(() => {
-      document.getElementById('newCategoryName').value = '';
+      document.getElementById('newCategoryInput').value = '';
       loadCategories(); // Actualiza la tabla
       Swal.fire({ icon: 'success', title: 'Categoría agregada correctamente', timer: 2000, showConfirmButton: false });
     })
@@ -147,8 +150,9 @@ async function loadCareers() {
 }
 // Registra una nueva carrera
 async function registerCareer() {
-  const careerInput = document.getElementById('careerName');
-  const name = careerInput ? careerInput.value.trim() : '';
+  const inputValue = document.getElementById('careerInput').value.trim();
+  const selectValue = document.getElementById('careerName').value;
+  const name = inputValue || selectValue;
   if (!name) return showAlert('El nombre de la carrera es obligatorio', 'error');
 
   try {
@@ -159,7 +163,8 @@ async function registerCareer() {
     });
     if (!res.ok) throw new Error('Error al agregar carrera');
     showAlert('Carrera agregada correctamente', 'success');
-    if (careerInput) careerInput.value = '';
+    document.getElementById('careerInput').value = '';
+    document.getElementById('careerName').value = '';
     loadCareers();
   } catch (error) {
     if (error.message === 'La carrera ya existe') {

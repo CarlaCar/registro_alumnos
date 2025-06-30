@@ -28,8 +28,11 @@
     <section class="card">
       <h2>Agregar Nueva Categoría</h2>
       <form id="formCategory" class="form-categoria form-columna">
-        <label for="newCategoryName">Categoría:</label>
-        <select id="newCategoryName" class="campo-uniforme" required>
+        <label for="newCategoryInput">Nueva Categoría:</label>
+        <input type="text" id="newCategoryInput" class="campo-uniforme" placeholder="Ingresá una nueva categoría" />
+
+        <label for="newCategoryName">O seleccioná una existente:</label>
+        <select id="newCategoryName" class="campo-uniforme">
           <option value="">Seleccioná una categoría</option>
           <option value="Ciencias Sociales">Ciencias Sociales</option>
           <option value="Ciencias Naturales">Ciencias Naturales</option>

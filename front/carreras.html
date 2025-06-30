@@ -27,7 +27,11 @@
 
     <section class="card">
       <h2>Agregar Nueva Carrera</h2>
-      <form id="formCareer" class="form-carrera">
+      <form id="formCareer" class="form-carrera form-columna">
+        <label for="careerInput">Nueva Carrera:</label>
+        <input type="text" id="careerInput" class="campo-uniforme" placeholder="Ingresá una nueva carrera" />
+
+        <label for="careerName">O seleccioná una existente:</label>
         <select id="careerName" class="campo-uniforme">
           <option value="ciencia de datos">Ciencia de Datos</option>
           <option value="programador">Programador</option>
@@ -39,7 +43,7 @@
           <option value="psicologia">Psicología</option>
           <option value="ingenieria">Ingeniería</option>
         </select>
-        <button type="button" class="btn btn-celeste campo-uniforme" onclick="registerCareer()">Agregar</button>
+        <button type="button" class="btn btn-celeste campo-uniforme" onclick="registerCareer()">Agregar Carrera</button>
       </form>
     </section>
 
