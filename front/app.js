@@ -413,16 +413,52 @@ document.querySelector('header a').addEventListener('click', function(e) {
   window.location.href = 'bienvenida.html';
 });
 
-/*
-  Explicación del flujo del sistema:
-
-  Cuando entrás a la página, lo primero que ves es una bienvenida y un menú para ir a las distintas secciones: inicio, carreras, y categorías.
-  Cada sección tiene formularios para que puedas agregar, buscar o eliminar información de manera fácil.
-
-  Por ejemplo, si querés agregar una carrera, solo completás el nombre y tocás el botón "Agregar". Automáticamente, la carrera aparece en la lista de abajo.
-  Lo mismo pasa con las categorías y los alumnos: llenás los datos, tocás el botón y la información se suma a la tabla.
-
-  Si querés buscar o eliminar algo, solo escribís el nombre o el ID y tocás el botón correspondiente. El sistema te muestra el resultado o elimina el dato de la lista.
-
-  Todo el diseño está pensado para que sea claro y cómodo de usar, solo completás los campos, el sistema se encarga de mostrarte todo actualizado.
-*/
+// =======================
+// FLUJO DEL CÓDIGO - EXPLICACIÓN GENERAL
+// =======================
+//
+// Este archivo controla toda la lógica de interacción del sitio web con la API
+// para gestionar alumnos, carreras y categorías.
+//
+// 1. CONFIGURACIÓN INICIAL:
+// Se definen las URLs de la API, una clave de autenticación (API_KEY) y los headers
+// comunes que se enviarán con cada petición HTTP.
+//
+// 2. AL CARGAR LA PÁGINA:
+// Con el evento DOMContentLoaded se detecta qué secciones están visibles
+// y se llaman funciones como:
+// - loadCareers() → carga las carreras en una tabla
+// - loadStudents() → carga los alumnos en su tabla
+// - loadCategories() → carga las categorías disponibles
+// - loadCareersSelect() → llena el select para elegir carrera al registrar estudiante
+//
+// 3. FUNCIONES PARA CATEGORÍAS:
+// - loadCategories(): hace GET a la API y muestra los resultados en una tabla.
+// - registerCategory(): toma datos del formulario y hace POST a la API.
+// - getCategoryByName(): busca una categoría específica por nombre.
+// - deleteCategory(): elimina una categoría existente por su nombre.
+//
+// 4. FUNCIONES PARA CARRERAS:
+// - loadCareers(): carga la lista completa de carreras.
+// - registerCareer(): registra una nueva carrera con POST.
+// - getCareerByName(): busca una carrera por nombre.
+// - deleteCareer(): elimina una carrera por su ID.
+// - loadCareersSelect(): actualiza el select con las carreras disponibles.
+//
+// 5. FUNCIONES PARA ESTUDIANTES:
+// - loadStudents(): muestra todos los alumnos en una tabla.
+// - registerStudent(): agrega un alumno nuevo con nombre y carrera.
+// - deleteStudent(): busca un alumno por ID, pide confirmación y lo elimina.
+// - searchStudent(): busca un alumno por ID o nombre y muestra los datos.
+//
+// 6. INTERFAZ Y USABILIDAD:
+// - Se usan alertas de SweetAlert para mostrar errores, éxitos y confirmaciones.
+// - La navegación se actualiza visualmente para resaltar el enlace activo.
+// - El logo redirige a la página de bienvenida.
+//
+// EN RESUMEN:
+// Todo el flujo del código está pensado para que el usuario pueda interactuar
+// de forma dinámica con la base de datos (API) sin recargar la página.
+// Cada función se encarga de una acción: cargar datos, registrar, buscar o eliminar.
+//  El sistema mantiene actualizada la interfaz de acuerdo a las acciones del usuario.
+//
