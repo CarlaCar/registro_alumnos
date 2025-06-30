@@ -417,6 +417,29 @@ document.querySelector('header a').addEventListener('click', function(e) {
   e.preventDefault();
   window.location.href = 'bienvenida.html';
 });
+async function loadCategoriesForCareers() {
+  const select = document.getElementById('careerCategory');
+  if (!select) return;
+  select.innerHTML = '<option value="">Seleccioná una categoría</option>';
+  try {
+    const res = await fetch(API_CATEGORIES_URL, { headers });
+    const categorias = await res.json();
+    categorias.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat.name;
+      option.textContent = cat.name;
+      select.appendChild(option);
+    });
+  } catch (e) {
+    // Manejo de error opcional
+  }
+}
+
+// Llama a esta función cuando cargue la página de carreras
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('careerCategory')) loadCategoriesForCareers();
+  // ...otras inicializaciones...
+});
 
 // =======================
 // FLUJO DEL CÓDIGO - EXPLICACIÓN GENERAL

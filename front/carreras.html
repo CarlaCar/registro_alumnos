@@ -28,21 +28,15 @@
     <section class="card">
       <h2>Agregar Nueva Carrera</h2>
       <form id="formCareer" class="form-carrera form-columna">
-        <label for="careerInput">Nueva Carrera:</label>
-        <input type="text" id="careerInput" class="campo-uniforme" placeholder="Ingresá una nueva carrera" />
+        <label for="careerName">Nombre de la carrera:</label>
+        <input type="text" id="careerName" class="campo-uniforme" placeholder="Ingresá una nueva carrera" />
 
-        <label for="careerName">O seleccioná una existente:</label>
-        <select id="careerName" class="campo-uniforme">
-          <option value="ciencia de datos">Ciencia de Datos</option>
-          <option value="programador">Programador</option>
-          <option value="inteligencia artificial">Inteligencia Artificial</option>
-          <option value="analista de sistemas">Analista de Sistemas</option>
-          <option value="abogacia">Abogacía</option>
-          <option value="enfermeria">Enfermería</option>
-          <option value="medicina">Medicina</option>
-          <option value="psicologia">Psicología</option>
-          <option value="ingenieria">Ingeniería</option>
+        <label for="careerCategory">Categoría:</label>
+        <select id="careerCategory" class="campo-uniforme" required>
+          <option value="">Seleccioná una categoría</option>
+          <!-- Las opciones se llenan desde JS -->
         </select>
+
         <button type="button" class="btn btn-celeste campo-uniforme" onclick="registerCareer()">Agregar Carrera</button>
       </form>
     </section>
